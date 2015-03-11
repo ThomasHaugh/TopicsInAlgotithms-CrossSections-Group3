@@ -26,7 +26,43 @@ public class SegmentedPaths {
         SegmentedPath newSegment = new SegmentedPath( pA );   //   segment if it is long enough
         if ( newSegment.addNextRemovablePointChecked( pB ) ) { addPath(newSegment); }
     }
-    
+
+    /*
+      This method takes bubbles and puts them in bigger bubbles then adds them to sets
+    */
+    ArrayList<Integer>[] getOverlapsOfBubblesAndPutThemInSets (SegmentedPaths paths) {
+	ArrayList<Integer>[] unionFinds = new ArrayList<Integer>[paths.size()];
+	for(int i = 0; i<paths.size();i++) {
+	    unionFinds[i].add(i); 
+	}
+	for(int i = 0; i<paths.size();i++) {
+	    for (int j = i+1; j<paths.size();j++) {
+		SegmentedPath pathA = paths.get(i);
+		SegmentedPath pathB = paths.get(j);
+		if (pathA.overlap(pathB) != null) {
+		    unionFinds[j].addAll(unionFinds[i]);
+		    for(int iPath : unionFinds[j]) {
+			unionFinds[iPath] = unionFinds[j]; 
+		    }
+		}
+	    }
+	}
+	return unionFinds;
+    }
+
+    SegmentedPaths getSetBubble (SegmentedPaths paths, ArrayList<Integer>[] unionFind) {
+	SegmentedPaths offsetPaths = new SegmentedPaths(); 
+	for(int i = 0; i<paths.size();i++) {
+	    for(ArrayList<integer> pathnums : unionFinds[i]) {
+		path = getOuterBubble(pathNum);
+		offsetPaths.addPath(path);
+	    }
+	}
+	return offSetPaths
+    }
+
+    SegmentedPath getOuterBubble
+	
     // Calculate the offsets
     SegmentedPaths offsetStage1(Group path2D, float offset) {
         SegmentedPaths offsetPaths = new SegmentedPaths();

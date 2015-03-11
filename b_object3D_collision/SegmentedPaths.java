@@ -26,10 +26,46 @@ public class SegmentedPaths {
         SegmentedPath newSegment = new SegmentedPath( pA );   //   segment if it is long enough
         if ( newSegment.addNextRemovablePointChecked( pB ) ) { addPath(newSegment); }
     }
+   
+    SegmentedPath findBubble(SegmentedPath path, Float epsilon){
+	SegmentedPath bubble = new SegmentedPath();
+	for (int i = 0; i<10;i++){
+	    Vctr3D p1 = path.get(((i  ))); //% path.size())-1);
+	    Vctr3D p2 = path.get(((i+1))); //% path.size())-1);
+	    Vctr3D p3 = path.get(((i+2))); //% path.size())-1);
+	    
+	    // vArrow = p1p2-p2p3
+	    Vctr3D p1p2 = p2.minus(p1);
+	    Vctr3D p2p3 = p3.minus(p1);
+	    Vctr3D p1p3 = p3.minus(p1);//Need  In cross product
+	    
+	    float crsProduct = p1p2.x * p1p3.y - p1p2.y * p1p3.x ;
+	    float sign = 1;
+	    if (crsProduct > 0) {sign = -1;}
+	    
+	    Vctr3D v    = p1p2.minus(p2p3);
+	    v.z         = p2.z;
 
+	    //double->float, my programming license should be revoked for doing it this way
+	    // but seriously if weird problems pop up it's probably from here
+	    float length = (float) Math.sqrt((v.x*v.x)+(v.y*v.y));
+
+	    // make unit vector and multiply by epsilon
+	    Vctr3D vHat = new Vctr3D();
+	    vHat.x = sign*v.x/length*epsilon;
+	    vHat.y = sign*v.y/length*epsilon;
+	    vHat.z = 0;
+	    //vHat should be shifted to p2
+	    vHat = vHat.plus(p2);
+		
+	    bubble.addNextPoint(vHat);
+	}
+	return bubble;
+    }
     /*
       This method takes bubbles and puts them in bigger bubbles then adds them to sets
     */
+    /*
     ArrayList<Integer>[] getOverlapsOfBubblesAndPutThemInSets (SegmentedPaths paths) {
 	ArrayList<Integer>[] unionFinds = new ArrayList<Integer>[paths.size()];
 	for(int i = 0; i<paths.size();i++) {
@@ -60,13 +96,20 @@ public class SegmentedPaths {
 	}
 	return offSetPaths
     }
-
-    SegmentedPath getOuterBubble
+    */
+    //SegmentedPath getOuterBubble
 	
     // Calculate the offsets
     SegmentedPaths offsetStage1(Group path2D, float offset) {
         SegmentedPaths offsetPaths = new SegmentedPaths();
 
+	for(SegmentedPath path : paths) {
+	    SegmentedPath bubble = new SegmentedPath(); 
+	    bubble = findBubble(path,offset);
+	    offsetPaths.addPath(bubble);
+	}
+	
+	/*
         Vctr3D offsetVector = new Vctr3D(0,0,0);
 
         for ( SegmentedPath path : paths ) {
@@ -171,7 +214,7 @@ public class SegmentedPaths {
                 offsetPath.addNextPoint(pointStrtPath);
             }
         }
-        
+        */
         return offsetPaths;
     }
     

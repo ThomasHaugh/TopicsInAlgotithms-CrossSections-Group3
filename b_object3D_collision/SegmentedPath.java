@@ -20,6 +20,10 @@ public class SegmentedPath {
         path.add(nextPoint);
     }
 
+    boolean isEmpty() {
+	return path.isEmpty();
+    }
+    
     private void removePoint(int iPoint) {
         path.remove(iPoint);
     }
@@ -78,4 +82,7 @@ public class SegmentedPath {
         }
     }
 
+    boolean overlap (SegmentedPath otherPath) {
+	return false;
+    }
 }

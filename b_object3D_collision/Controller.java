@@ -362,18 +362,18 @@ public class Controller {
                 System.out.println("All comparisons took "+sumOfDurations+" nanoseconds. ("+sumOfDurations/1000000000.0+" seconds)");
             } // if  ( e.getCode()== KeyCode.A ) ends
             else if  ( e.getCode()== KeyCode.B  ) {// B in QWERTY or Dvorak (but, in Dvorak, it is N on a QWERTY keyboard)
-                MeshView prismMesh = view.loadMeshView(new File("/home/kgnotte/Downloads/b_object3D_collision/simplePrismSmall.stl")); // Load up simpleprism3.stl       
+                //MeshView prismMesh = view.loadMeshView(new File("/home/kgnotte/Downloads/b_object3D_collision/simplePrismSmall.stl")); // Load up simpleprism3.stl       
                 MeshView  leftMesh = view.loadMeshView(new File("/home/kgnotte/Downloads/b_object3D_collision/LemurHandLeft.stl")); // Load up LemurHandLeft.stl        
                 MeshView rightMesh = view.loadMeshView(new File("/home/kgnotte/Downloads/b_object3D_collision/LemurHandRight.stl")); // Load up LemurHandRight.stl
-                MeshView  gearMesh = view.loadMeshView(new File("/home/kgnotte/Downloads/b_object3D_collision/pulleys_20141230-3763-1v65dqe-0.stl")); // Load up pulleys_20141230-3763-1v65dqe-0.stl
+                //MeshView  gearMesh = view.loadMeshView(new File("/home/kgnotte/Downloads/b_object3D_collision/pulleys_20141230-3763-1v65dqe-0.stl")); // Load up pulleys_20141230-3763-1v65dqe-0.stl
                 rightMesh.getTransforms().add( new Translate(0,-15,0));// new Translate(0,-15,0));// 
                 rightMesh.getTransforms().add( new Translate(-43,0,0));// new Translate(-45,0,0));// 
                 rightMesh.getTransforms().add( new Rotate(10,Rotate.X_AXIS) );
                 leftMesh .getTransforms().add( new Translate(  0,  0,  0));
-                prismMesh.getTransforms().add( new Translate( 45,  0,  0));
-                gearMesh .getTransforms().add( new Translate(-85, -3, -5));
-                gearMesh .getTransforms().add( new Rotate(-20,Rotate.Z_AXIS) );
-                gearMesh .getTransforms().add( new Rotate( 45,Rotate.Y_AXIS) );
+                //prismMesh.getTransforms().add( new Translate( 45,  0,  0));
+                //gearMesh .getTransforms().add( new Translate(-85, -3, -5));
+                //gearMesh .getTransforms().add( new Rotate(-20,Rotate.Z_AXIS) );
+                //gearMesh .getTransforms().add( new Rotate( 45,Rotate.Y_AXIS) );
 
                 view.rotate(  72, new Point3D(1,1,0), isCrossSection);
 

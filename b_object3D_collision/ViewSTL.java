@@ -727,18 +727,18 @@ public class ViewSTL {
 
       // Find and remove intersections within the path
       long startTimeStage2 = System.nanoTime(); // Start  the timing for stage 2
-      offsetPaths.offsetStage2(); 
+      //offsetPaths.offsetStage2(); 
       long   endTimeStage2 = System.nanoTime(); // Finish the timing for stage 2
 
       // Find and remove segments within offset of path
-      crossSection.offsetStage3(offsetPaths, offset); 
+      //crossSection.offsetStage3(offsetPaths, offset); 
 
       // Skipping stage 4. Not important for this exercise
 
-      offsetPaths.removeMinisculeSegments();
-      offsetPaths.combineSegmentPaths();
-      offsetPaths.removeMinisculeSegments(); // Repeat for some extra cleanup 
-      offsetPaths.combineSegmentPaths();
+      // offsetPaths.removeMinisculeSegments();
+      //offsetPaths.combineSegmentPaths();
+      //offsetPaths.removeMinisculeSegments(); // Repeat for some extra cleanup 
+      // offsetPaths.combineSegmentPaths();
 
       // Finish the total timing
       long endTime  = System.nanoTime();
@@ -765,6 +765,7 @@ public class ViewSTL {
       SegmentedPaths offsetPaths01 = getOffsetPaths(paths, 10/2.f);
       SegmentedPaths offsetPaths02 = getOffsetPaths(paths, 20/2.f);
       SegmentedPaths offsetPaths03 = getOffsetPaths(paths, 30/2.f);
+      
       SegmentedPaths offsetPaths04 = getOffsetPaths(paths, 40/2.f);
       SegmentedPaths offsetPaths05 = getOffsetPaths(paths, 50/2.f);
       SegmentedPaths offsetPaths06 = getOffsetPaths(paths, 60/2.f);
@@ -781,11 +782,12 @@ public class ViewSTL {
       SegmentedPaths offsetPaths17 = getOffsetPaths(paths,170/2.f);
       SegmentedPaths offsetPaths18 = getOffsetPaths(paths,180/2.f);
       SegmentedPaths offsetPaths19 = getOffsetPaths(paths,190/2.f);
-
+      
       paths        .displayPaths(path2D, Color.BLACK );
       offsetPaths01.displayPaths(path2D, Color.BLUE  );
       offsetPaths02.displayPaths(path2D, Color.BLUE  );
       offsetPaths03.displayPaths(path2D, Color.BLUE  );
+      
       offsetPaths04.displayPaths(path2D, Color.BLUE  );
       offsetPaths05.displayPaths(path2D, Color.BLUE  );
       offsetPaths06.displayPaths(path2D, Color.BLUE  );
@@ -802,7 +804,7 @@ public class ViewSTL {
       offsetPaths17.displayPaths(path2D, Color.BLUE  );
       offsetPaths18.displayPaths(path2D, Color.BLUE  );
       offsetPaths19.displayPaths(path2D, Color.BLUE  );
-
+      
       System.out.println("Calculations stage 2: " + ((double)(sumOfDurationsStage2)/1000000.0) + " milliseconds");
       System.out.println("Calculations total:   " + ((double)(sumOfDurations      )/1000000.0) + " milliseconds");
       sumOfDurationsStage2 = sumOfDurations = 0;
